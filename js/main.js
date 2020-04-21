@@ -24,7 +24,9 @@ function toggle(header) {
 }
 
 const balls = [];
-const maxBalls = 100;
+const maxBalls = window.innerWidth <= 500 ? 25 : 100;
+const rMultiplier = window.innerWidth <= 500 ? 2.0 : 1.0;
+const aMultiplier = window.innerWidth <= 500 ? 0.3 : 1.0;
 let canvas, ctx;
 let lastInstant = 0.0;
 
@@ -63,7 +65,7 @@ function drawRandomBalls(thisInstant) {
         for (let i = 0; i < balls.length; i++) {
             const ball = balls[i];
             ctx.beginPath();
-            ctx.fillStyle = "rgba(96, 184, 24, " + min(0.3, ball.a) + ")";
+            ctx.fillStyle = "rgba(96, 184, 24, " + (min(0.3, ball.a) * aMultiplier) + ")";
             ctx.arc(ball.rx, ball.ry, ball.rr, 0, 2.0 * Math.PI, false);
             ctx.fill();
         }
@@ -84,7 +86,7 @@ function drawRandomBalls(thisInstant) {
             y: Math.random(),
             dx: randomSgn() * Math.random() * 0.01,
             dy: randomSgn() * Math.random() * 0.01,
-            r: Math.random() * 0.1,
+            r: Math.random() * 0.1 * rMultiplier,
             a: 0.0,
             ra: Math.random() * 1.0
         };
@@ -102,7 +104,7 @@ function prize(e) {
             y: e.clientY / window.innerHeight,
             dx: randomSgn() * Math.random() * 0.3,
             dy: randomSgn() * Math.random() * 0.3,
-            r: 0.01,
+            r: 0.01 * rMultiplier,
             a: Math.random() * 0.7,
             ra: -0.7
         };
