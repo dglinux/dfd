@@ -133,7 +133,7 @@ function main() {
 window.addEventListener("load", main);
 
 const start = new Date("2020/4/25");
-const end = new Date("2020/4/30");
+const end = new Date("2020/5/5");
 
 if (end - new Date() < 0) {
     reject("提交已经结束");
